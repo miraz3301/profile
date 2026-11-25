@@ -94,12 +94,22 @@ function buildShuffle(el) {
 }
 
 function measureShuffle(el) {
+  // getBoundingClientRect() includes CSS scale, and the hero card is scaled while you scroll.
+  // So switch the transform off while measuring, and start from natural widths.
+  const card = el.closest(".card");
+  const prev = card ? card.style.transform : "";
+  if (card) card.style.transform = "none";
+  el.cells.forEach(({ cell, strip }) => {
+    cell.style.width = "";
+    Array.from(strip.children).forEach((c) => (c.style.width = ""));
+  });
   el.cells.forEach(({ cell, strip }) => {
     const w = strip.children[0].getBoundingClientRect().width;
     Array.from(strip.children).forEach((c) => (c.style.width = w + "px"));
     cell.style.width = w + "px";
     strip.dataset.w = w;
   });
+  if (card) card.style.transform = prev;
 }
 
 let loopTimer;
@@ -137,7 +147,7 @@ Promise.resolve(document.fonts && document.fonts.load("400 39.5px Satoshi"))
     nameEl.addEventListener("mouseenter", () => entered && runShuffle(nameEl));
   }
 });
-window.addEventListener("resize", () => measureShuffle(nameEl));
+
 
 /* ============================================================
    Live Discord status via Lanyard
