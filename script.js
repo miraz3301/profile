@@ -6,8 +6,14 @@ const CONFIG = {
   useDisplayName: false,                 // false = show @username, true = show display name
   fallbackTag: { text: "ASPH", icon: "assets/guild-tag.png" },
   audioVolume: 0.5,                      // 0 to 1
-  shuffle: { duration: 450, stagger: 35, scramble: false, hoverReplay: true },
-  views: { enabled: true, namespace: "miraz3301-profile", key: "views", start: 49 },
+  shuffle: {
+    duration: 450,      // ms for each letter to slide in
+    stagger: 35,        // ms delay between letters
+    scramble: false,    // true = random letters flash while sliding
+    hoverReplay: true,  // replay when hovering the name
+    loop: true,         // infinite loop
+    loopDelay: 1200,    // ms pause between loops
+  },
 };
 
 /* ============================================================
@@ -81,9 +87,15 @@ function measureShuffle(el) {
   });
 }
 
+let loopTimer;
 function runShuffle(el) {
   if (!el.cells) return;
   el.classList.add("ready");
+  clearTimeout(loopTimer);
+  if (CONFIG.shuffle.loop) {
+    const total = CONFIG.shuffle.duration + el.cells.length * CONFIG.shuffle.stagger;
+    loopTimer = setTimeout(() => runShuffle(el), total + CONFIG.shuffle.loopDelay);
+  }
   el.cells.forEach(({ strip }, i) => {
     const w = parseFloat(strip.dataset.w);
     strip.animate(
@@ -200,22 +212,3 @@ function connectLanyard() {
   ws.onerror = () => ws.close();
 }
 connectLanyard();
-
-/* ============================================================
-   Profile views (free counter API, counts once per browser session)
-   ============================================================ */
-(function views() {
-  const v = CONFIG.views;
-  if (!v.enabled) return;
-  const box = $("views"), out = $("views-count");
-  const seen = sessionStorage.getItem("viewed");
-  const url = `https://api.counterapi.dev/v1/${v.namespace}/${v.key}/${seen ? "" : "up"}`;
-  fetch(url)
-    .then((r) => r.json())
-    .then((j) => {
-      out.textContent = (j.count || 0) + v.start;
-      box.hidden = false;
-      sessionStorage.setItem("viewed", "1");
-    })
-    .catch(() => {});
-})();
