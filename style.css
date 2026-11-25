@@ -152,7 +152,37 @@ body {
 .social svg { width: 35px; height: 35px; transition: transform .3s; }
 .social .icon-img { width: 40px; height: 40px; object-fit: cover; transition: transform .3s; }
 .social:hover svg, .social:hover .icon-img { transform: scale(1.1); }
+.volume {
+  position: fixed; z-index: 50;
+  top: calc(17px + env(safe-area-inset-top, 0px)); left: 17px;
+  height: 67px; width: 67px;
+  display: flex; align-items: center;
+  border-radius: 12px;
+  background: rgba(24, 24, 24, .55);
+  border: 2px solid rgba(255, 255, 255, .12);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  overflow: hidden;
+  transition: width .3s ease;
+}
+.volume:hover, .volume:focus-within { width: 211px; }
+.vol-btn { flex: 0 0 63px; height: 100%; display: flex; align-items: center; justify-content: center; background: none; border: 0; padding: 0; color: #fff; cursor: pointer; }
+.vol-btn svg { width: 34px; height: 34px; }
+.volume .cross { display: none; }
+.volume.muted .cross { display: inline; }
+.volume.muted .waves { display: none; }
 
+.vol-range {
+  --v: 50%;
+  -webkit-appearance: none; appearance: none;
+  width: 0; opacity: 0; margin: 0; height: 22px; background: transparent; cursor: pointer;
+  transition: width .3s ease, opacity .2s ease, margin .3s ease;
+}
+.volume:hover .vol-range, .volume:focus-within .vol-range { width: 118px; opacity: 1; margin-right: 18px; }
+.vol-range::-webkit-slider-runnable-track { height: 7px; border-radius: 99px; background: linear-gradient(to right, #fff var(--v), rgba(255,255,255,.28) var(--v)); }
+.vol-range::-moz-range-track { height: 7px; border-radius: 99px; background: rgba(255,255,255,.28); }
+.vol-range::-moz-range-progress { height: 7px; border-radius: 99px; background: #fff; }
+.vol-range::-webkit-slider-thumb { -webkit-appearance: none; width: 15px; height: 15px; margin-top: -4px; border-radius: 50%; background: #fff; border: 0; }
+.vol-range::-moz-range-thumb { width: 15px; height: 15px; border-radius: 50%; background: #fff; border: 0; }
 @media (max-width: 480px) {
   .enter-text { font-size: 24px; }
 }
