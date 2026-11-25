@@ -5,15 +5,11 @@ const CONFIG = {
   discordId: "865475390561320980",
   useDisplayName: false,                 // false = show @username, true = show display name
   fallbackTag: { text: "ASPH", icon: "assets/guild-tag.png" },
+  // Optional: URL of the little Cloudflare Worker that remembers when you were last online
+  // (see README / chat). Leave "" to use the fallback (only remembers within a visitor's browser).
+  lastSeenUrl: "",
   audioVolume: 0.5,                      // 0 to 1
-  shuffle: {
-    duration: 450,      // ms for each letter to slide in
-    stagger: 35,        // ms delay between letters
-    scramble: false,    // true = random letters flash while sliding
-    hoverReplay: true,  // replay when hovering the name
-    loop: true,         // infinite loop
-    loopDelay: 1200,    // ms pause between loops
-  },
+  shuffle: { duration: 450, stagger: 35, scramble: false, hoverReplay: true, loop: true, loopDelay: 1200 },
 };
 
 /* ============================================================
@@ -70,11 +66,6 @@ function buildShuffle(el) {
       el.cells.push({ cell, strip });
     });
     el.append(w);
-    if (wi < arr.length - 1) {
-      const sp = document.createElement("span");
-      sp.className = "space";
-      el.append(sp);
-    }
   });
 }
 
@@ -133,22 +124,99 @@ const els = {
 };
 const STATUS_LABEL = { online: "online", idle: "idle", dnd: "do not disturb", offline: "offline" };
 
-function activityLine(d) {
-  if (d.listening_to_spotify && d.spotify) {
-    return `Listening to ${d.spotify.song} - ${d.spotify.artist}`;
+/* ---- the line under your name: note (custom status) / activity / last seen ---- */
+let lastData = null;       // latest presence from Lanyard
+let lastOnline = Number(localStorage.getItem("lastOnline")) || null;  // ms timestamp
+
+function ago(ms) {
+  const m = Math.floor((Date.now() - ms) / 60000);
+  if (m < 1) return "just now";
+  if (m < 60) return m + (m === 1 ? " minute ago" : " minutes ago");
+  const h = Math.floor(m / 60);
+  if (h < 24) return h + (h === 1 ? " hour ago" : " hours ago");
+  const d = Math.floor(h / 24);
+  return d + (d === 1 ? " day ago" : " days ago");
+}
+
+function addEmoji(box, e) {
+  if (!e) return;
+  if (e.id) {
+    const img = document.createElement("img");
+    img.className = "emoji";
+    img.alt = e.name || "";
+    img.src = `https://cdn.discordapp.com/emojis/${e.id}.${e.animated ? "gif" : "webp"}?size=48&quality=lossless`;
+    box.append(img);
+  } else if (e.name) {
+    const s = document.createElement("span");
+    s.className = "txt";
+    s.textContent = e.name + " ";
+    box.append(s);
   }
+}
+
+function renderSub() {
+  const d = lastData;
+  const box = els.sub;
+  box.textContent = "";
+  if (!d) return;
+  const status = d.discord_status || "offline";
+
+  if (status === "offline") {
+    const s = document.createElement("span");
+    s.className = "italic txt";
+    s.textContent = lastOnline ? "last seen " + ago(lastOnline) : "offline";
+    box.append(s);
+    return;
+  }
+
   const acts = d.activities || [];
   const custom = acts.find((a) => a.type === 4);
-  if (custom && (custom.state || custom.emoji)) {
-    const emoji = custom.emoji && custom.emoji.name && !custom.emoji.id ? custom.emoji.name + " " : "";
-    return (emoji + (custom.state || "")).trim();
+  let line = "";
+  if (d.listening_to_spotify && d.spotify) line = `Listening to ${d.spotify.song} - ${d.spotify.artist}`;
+  else {
+    const game = acts.find((a) => a.type === 0);
+    if (game) line = `Playing ${game.name}`;
   }
-  const game = acts.find((a) => a.type === 0);
-  if (game) return `Playing ${game.name}`;
-  const other = acts.find((a) => a.type !== 4);
-  if (other) return other.name;
-  return STATUS_LABEL[d.discord_status] || "offline";
+
+  if (line) {                      // activity wins over the note
+    const s = document.createElement("span");
+    s.className = "txt";
+    s.textContent = line;
+    box.append(s);
+  } else if (custom && (custom.state || custom.emoji)) {   // your note, e.g. the cat emoji
+    addEmoji(box, custom.emoji);
+    if (custom.state) {
+      const s = document.createElement("span");
+      s.className = "txt";
+      s.textContent = custom.state;
+      box.append(s);
+    }
+  } else {
+    const s = document.createElement("span");
+    s.className = "txt";
+    s.textContent = STATUS_LABEL[status] || status;
+    box.append(s);
+  }
 }
+
+// keep "x minutes ago" fresh
+setInterval(renderSub, 30000);
+
+// ask the optional Worker when you were last online
+function loadLastSeen() {
+  if (!CONFIG.lastSeenUrl) return;
+  fetch(CONFIG.lastSeenUrl)
+    .then((r) => r.json())
+    .then((j) => {
+      if (j && j.lastOnline) {
+        lastOnline = Math.max(lastOnline || 0, j.lastOnline);
+        renderSub();
+      }
+    })
+    .catch(() => {});
+}
+loadLastSeen();
+setInterval(loadLastSeen, 120000);
 
 function renderPresence(d) {
   const u = d.discord_user || {};
@@ -174,7 +242,13 @@ function renderPresence(d) {
 
   els.status.className = "status " + status;
   els.status.title = STATUS_LABEL[status] || status;
-  els.sub.textContent = activityLine(d);
+
+  lastData = d;
+  if (status !== "offline") {          // seen online right now
+    lastOnline = Date.now();
+    localStorage.setItem("lastOnline", String(lastOnline));
+  }
+  renderSub();
 
   const g = u.primary_guild;
   if (g && g.tag) {
@@ -186,7 +260,8 @@ function renderPresence(d) {
 }
 
 function showNotMonitored() {
-  els.sub.textContent = "offline";
+  lastData = { discord_status: "offline" };
+  renderSub();
 }
 
 // initial paint via REST
