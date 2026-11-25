@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#000000">
+  <title>Md. Miraz Morshed</title>
+  <meta name="description" content="Md. Miraz Morshed (miraz3301) - CSE student. Links, music and live Discord status.">
+  <meta property="og:title" content="Md. Miraz Morshed">
+  <meta property="og:description" content="CSE student. Links, music and live Discord status.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/webp" href="assets/avatar.webp">
+  <link rel="preload" href="assets/font.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="portfolio.css">
+</head>
+<body>
+  <!-- Background video (muted) + music (separate, starts after click) -->
+  <video id="bg-video" src="https://r2.guns.lol/fa9f3ac0-8830-4fe2-bf0f-2b38bbe5c1ba.mp4" playsinline loop muted preload="auto"></video>
+  <audio id="bg-audio" src="https://r2.guns.lol/209bc6d3-767a-4428-9259-e0c487175b0e.mp3" loop preload="auto"></audio>
+  <div class="dim"></div>
+
+  <!-- Click to enter (browsers block sound until the visitor interacts) -->
+  <div id="enter" role="button" tabindex="0" aria-label="Click to enter">
+    <div class="enter-text">click to enter...</div>
+  </div>
+
+  <!-- Volume control (hover to open the slider, click the icon to mute) -->
+  <div class="volume" id="volume">
+    <button class="vol-btn" id="vol-btn" type="button" aria-label="Mute / unmute">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M3 9v6h4l5 4V5L7 9H3z" fill="currentColor"/>
+        <g class="waves"><path d="M16 8.5a5 5 0 0 1 0 7"/><path d="M18.5 6a8.5 8.5 0 0 1 0 12"/></g>
+        <g class="cross"><path d="M16 9.5l5 5M21 9.5l-5 5"/></g>
+      </svg>
+    </button>
+    <input class="vol-range" id="vol-range" type="range" min="0" max="100" value="50" aria-label="Volume">
+  </div>
+
+  <main class="page" id="hero">
+    <section class="card">
+      <div class="avatar-wrap">
+        <img class="avatar-frame" src="assets/avatar-frame.png" alt="">
+        <img class="avatar" src="assets/avatar.webp" alt="Md. Miraz Morshed">
+      </div>
+
+      <h1 id="name" class="shuffle" aria-label="Md. Miraz Morshed">Md. Miraz Morshed</h1>
+
+      <!-- Live Discord status (Lanyard) -->
+      <div class="presence" id="presence">
+        <div class="p-avatar">
+          <img id="p-avatar-img" src="assets/discord-avatar.webp" alt="Discord avatar">
+          <img id="p-deco" class="p-deco" alt="" hidden>
+          <span id="p-status" class="status offline" title="offline"></span>
+        </div>
+        <div class="p-text">
+          <div class="p-name-row">
+            <span id="p-name">frozen_breath</span>
+            <span class="tag" id="p-tag"><img id="p-tag-img" src="assets/guild-tag.png" alt=""><span id="p-tag-text">ASPH</span></span>
+          </div>
+          <div class="p-sub" id="p-sub">connecting...</div>
+        </div>
+      </div>
+
+      <nav class="socials" aria-label="Social links">
+        <a class="social" href="https://codeforces.com/profile/miraz3301" target="_blank" rel="noopener noreferrer" aria-label="Codeforces"><img class="icon-img" alt="" src="assets/codeforces.webp"></a>
+        <a class="social" href="https://github.com/miraz3301" target="_blank" rel="noopener noreferrer" aria-label="Github"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="2.05 2 19.95 19.46"><path fill="currentColor" fill-rule="evenodd" d="M12.026 2c-5.509 0-9.974 4.465-9.974 9.974c0 4.406 2.857 8.145 6.821 9.465c.499.09.679-.217.679-.481c0-.237-.008-.865-.011-1.696c-2.775.602-3.361-1.338-3.361-1.338c-.452-1.152-1.107-1.459-1.107-1.459c-.905-.619.069-.605.069-.605c1.002.07 1.527 1.028 1.527 1.028c.89 1.524 2.336 1.084 2.902.829c.091-.645.351-1.085.635-1.334c-2.214-.251-4.542-1.107-4.542-4.93c0-1.087.389-1.979 1.024-2.675c-.101-.253-.446-1.268.099-2.64c0 0 .837-.269 2.742 1.021a9.582 9.582 0 0 1 2.496-.336a9.554 9.554 0 0 1 2.496.336c1.906-1.291 2.742-1.021 2.742-1.021c.545 1.372.203 2.387.099 2.64c.64.696 1.024 1.587 1.024 2.675c0 3.833-2.33 4.675-4.552 4.922c.355.308.675.916.675 1.846c0 1.334-.012 2.41-.012 2.737c0 .267.178.577.687.479C19.146 20.115 22 16.379 22 11.974C22 6.465 17.535 2 12.026 2z" clip-rule="evenodd"></path></svg></a>
+        <a class="social" href="https://linkedin.com/in/miraz3301" target="_blank" rel="noopener noreferrer" aria-label="Linkedin"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 24 24"><path fill="currentColor" d="M6.94 5a2 2 0 1 1-4-.002a2 2 0 0 1 4 .002M7 8.48H3V21h4zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-4 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.72-2.91z"></path></svg></a>
+        <a class="social" href="https://facebook.com/miraz3301" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="2 2 20 19.95"><path fill="currentColor" d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95"></path></svg></a>
+        <a class="social" href="https://instagram.com/_miraz3301" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="3 2.98 18.01 18.04"><path fill="currentColor" d="M20.947 8.305a6.53 6.53 0 0 0-.419-2.216a4.61 4.61 0 0 0-2.633-2.633a6.606 6.606 0 0 0-2.186-.42c-.962-.043-1.267-.055-3.709-.055s-2.755 0-3.71.055a6.606 6.606 0 0 0-2.185.42a4.607 4.607 0 0 0-2.633 2.633a6.554 6.554 0 0 0-.419 2.185c-.043.963-.056 1.268-.056 3.71s0 2.754.056 3.71c.015.748.156 1.486.419 2.187a4.61 4.61 0 0 0 2.634 2.632a6.584 6.584 0 0 0 2.185.45c.963.043 1.268.056 3.71.056s2.755 0 3.71-.056a6.59 6.59 0 0 0 2.186-.419a4.615 4.615 0 0 0 2.633-2.633c.263-.7.404-1.438.419-2.187c.043-.962.056-1.267.056-3.71c-.002-2.442-.002-2.752-.058-3.709zm-8.953 8.297c-2.554 0-4.623-2.069-4.623-4.623s2.069-4.623 4.623-4.623a4.623 4.623 0 0 1 0 9.246zm4.807-8.339a1.077 1.077 0 0 1-1.078-1.078a1.077 1.077 0 1 1 2.155 0c0 .596-.482 1.078-1.077 1.078z"></path><circle cx="11.994" cy="11.979" r="3.003" fill="currentColor"></circle></svg></a>
+        <a class="social" href="https://open.spotify.com/user/31ry3tbij5zippauejgh2ld7ep6u?si=1WPxiXTMQDGS9_ZumHkeOA&utm_source=copy-link" target="_blank" rel="noopener noreferrer" aria-label="Spotify"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="2.02 2.02 19.98 19.98"><path fill="currentColor" d="M12.01 2.019c-5.495 0-9.991 4.496-9.991 9.991c0 5.494 4.496 9.99 9.991 9.99c5.494 0 9.99-4.496 9.99-9.99c0-5.495-4.446-9.991-9.99-9.991zm4.595 14.436c-.199.299-.549.4-.85.201c-2.349-1.45-5.296-1.75-8.793-.951c-.348.102-.648-.148-.748-.449c-.101-.35.149-.648.45-.749c3.795-.85 7.093-.499 9.69 1.1c.35.149.4.548.251.848zm1.2-2.747c-.251.349-.7.499-1.051.249c-2.697-1.646-6.792-2.148-9.939-1.148c-.398.101-.85-.1-.949-.498c-.101-.402.1-.852.499-.952c3.646-1.098 8.143-.548 11.239 1.351c.3.149.45.648.201.998zm.099-2.799c-3.197-1.897-8.542-2.097-11.59-1.146a.938.938 0 0 1-1.148-.6a.937.937 0 0 1 .599-1.151c3.547-1.049 9.392-.85 13.089 1.351c.449.249.599.849.349 1.298c-.25.35-.849.498-1.299.248z"></path></svg></a>
+        <a class="social" href="https://discord.com/users/865475390561320980" target="_blank" rel="noopener noreferrer" aria-label="Discord"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="1.96 4.26 20.03 15.53"><path fill="currentColor" d="M14.82 4.26a10.14 10.14 0 0 0-.53 1.1a14.66 14.66 0 0 0-4.58 0a10.14 10.14 0 0 0-.53-1.1a16 16 0 0 0-4.13 1.3a17.33 17.33 0 0 0-3 11.59a16.6 16.6 0 0 0 5.07 2.59A12.89 12.89 0 0 0 8.23 18a9.65 9.65 0 0 1-1.71-.83a3.39 3.39 0 0 0 .42-.33a11.66 11.66 0 0 0 10.12 0q.21.18.42.33a10.84 10.84 0 0 1-1.71.84a12.41 12.41 0 0 0 1.08 1.78a16.44 16.44 0 0 0 5.06-2.59a17.22 17.22 0 0 0-3-11.59a16.09 16.09 0 0 0-4.09-1.35zM8.68 14.81a1.94 1.94 0 0 1-1.8-2a1.93 1.93 0 0 1 1.8-2a1.93 1.93 0 0 1 1.8 2a1.93 1.93 0 0 1-1.8 2zm6.64 0a1.94 1.94 0 0 1-1.8-2a1.93 1.93 0 0 1 1.8-2a1.92 1.92 0 0 1 1.8 2a1.92 1.92 0 0 1-1.8 2z"></path></svg></a>
+        <a class="social" href="mailto:miraz.rzsian21@gmail.com" aria-label="Email"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="2 4 20 16"><path fill="currentColor" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2m0 4l-8 5l-8-5V6l8 5l8-5z"></path></svg></a>
+        <a class="social" href="https://t.me/miraz3301" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="2 3.61 20.02 16.79"><path fill="currentColor" d="m20.665 3.717l-17.73 6.837c-1.21.486-1.203 1.161-.222 1.462l4.552 1.42l10.532-6.645c.498-.303.953-.14.579.192l-8.533 7.701h-.002l.002.001l-.314 4.692c.46 0 .663-.211.921-.46l2.211-2.15l4.599 3.397c.848.467 1.457.227 1.668-.785l3.019-14.228c.309-1.239-.473-1.8-1.282-1.434z"></path></svg></a>
+      </nav>
+    </section>
+
+    <a class="scroll-hint" href="#portfolio" aria-label="Scroll down to my portfolio">
+      <span>scroll down</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+    </a>
+  </main>
+
+
+  <!-- ================= PORTFOLIO (page 2) ================= -->
+  <nav class="topnav" id="topnav" aria-label="Portfolio sections">
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#achievements">Achievements</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <div id="portfolio">
+
+    <!-- ABOUT -->
+    <section class="sec" id="about">
+      <div class="wrap">
+        <p class="kicker reveal">About me</p>
+        <h2 class="reveal" style="--d:.05s">Hi, I'm <span class="grad">Miraz</span>.</h2>
+        <div class="about-grid">
+          <div class="glass reveal" style="--d:.1s">
+            <p class="lead">I'm Md. Miraz Morshed, a BSc student in Computer Science &amp; Engineering at the Military Institute of Science and Technology (MIST), batch CSE 24.</p>
+            <p>I love competitive programming (Pupil on Codeforces, 2&#9733; on CodeChef) and building things with code: web pages, desktop apps and small machine-learning projects.</p>
+          </div>
+          <dl class="facts glass reveal" style="--d:.2s">
+            <div><dt>Studying</dt><dd>BSc in CSE, MIST</dd></div>
+            <div><dt>Batch</dt><dd>CSE 24 (2024 &ndash; 2028)</dd></div>
+            <div><dt>Codeforces</dt><dd>Pupil</dd></div>
+            <div><dt>CodeChef</dt><dd>2&#9733;</dd></div>
+            <div><dt>Handle</dt><dd>miraz3301</dd></div>
+          </dl>
+        </div>
+
+        <h3 class="sub reveal">Skills</h3>
+        <ul class="chips reveal" style="--d:.05s">
+          <li>C++</li><li>Java</li><li>Python</li><li>Data Structures &amp; Algorithms</li><li>Competitive Programming</li><li>Problem Solving</li><li>OOP</li><li>Machine Learning</li><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Firebase</li><li>Git &amp; GitHub</li>
+        </ul>
+
+        <h3 class="sub reveal">Education</h3>
+        <div class="timeline">
+          <div class="tl-item reveal">
+            <span class="dot"></span>
+            <span class="when">Mar 2024 &ndash; Feb 2028</span>
+            <h4>Military Institute of Science and Technology (MIST)</h4>
+            <p>BSc, Computer Science and Engineering</p>
+          </div>
+          <div class="tl-item reveal" style="--d:.08s">
+            <span class="dot"></span>
+            <span class="when">HSC 2023</span>
+            <h4>Rangpur Govt. College, Rangpur</h4>
+            <p>Higher Secondary Certificate</p>
+          </div>
+          <div class="tl-item reveal" style="--d:.16s">
+            <span class="dot"></span>
+            <span class="when">SSC 2021</span>
+            <h4>Rangpur Zilla School</h4>
+            <p>Secondary School Certificate</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="sec" id="projects">
+      <div class="wrap">
+        <p class="kicker reveal">Selected work</p>
+        <h2 class="reveal" style="--d:.05s">Projects</h2>
+        <div class="cards">
+
+          <article class="glass project reveal" style="--d:.05s">
+            <span class="num">01</span>
+            <h4>MIST CSE24 Batch Web Page</h4>
+            <p>The web page for our CSE 24 batch: animated member cards, a message board, a music toggle and a particle system, backed by Firebase and hosted on Vercel.</p>
+            <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Firebase</li></ul>
+            <div class="links">
+              <a class="more" href="https://mist-cse24.vercel.app/" target="_blank" rel="noopener noreferrer">Live site &rarr;</a>
+              <a class="more" href="https://github.com/miraz3301/mist-CSE24" target="_blank" rel="noopener noreferrer">GitHub &rarr;</a>
+            </div>
+          </article>
+
+          <article class="glass project reveal" style="--d:.12s">
+            <span class="num">02</span>
+            <h4>Pollution Tracker</h4>
+            <p>A Java-based desktop application built for CSE 220 using object-oriented programming. Team project with Farhan Sadik and Ragib.</p>
+            <ul class="tags"><li>Java</li><li>OOP</li><li>Desktop app</li></ul>
+            <div class="links">
+              <a class="more" href="https://github.com/miraz3301/Pollution-Tracker" target="_blank" rel="noopener noreferrer">GitHub &rarr;</a>
+            </div>
+          </article>
+
+          <article class="glass project reveal" style="--d:.19s">
+            <span class="num">03</span>
+            <h4>Social Network Ads</h4>
+            <p>A machine-learning prediction app built on a categorical dataset, using a Random Forest model to determine whether a user is likely to act on a particular product.</p>
+            <ul class="tags"><li>Machine Learning</li><li>Random Forest</li><li>Hugging Face</li></ul>
+            <div class="links">
+              <a class="more" href="https://github.com/miraz3301/Social-Network-Ads" target="_blank" rel="noopener noreferrer">GitHub &rarr;</a>
+            </div>
+          </article>
+
+          <article class="glass project reveal" style="--d:.26s">
+            <span class="num">04</span>
+            <h4>Lenden</h4>
+            <p>A mobile app with a bKash/Nagad-style UI for keeping track of borrowings and lendings. No money moves through it, and an entry only counts once both people verify it.</p>
+            <ul class="tags"><li>Mobile app</li><li>UI / UX</li></ul>
+          </article>
+
+          <article class="glass project reveal" style="--d:.05s">
+            <span class="num">05</span>
+            <h4>ExamPaper Grader</h4>
+            <p>A teacher-assistive tool for grading handwritten Bangla and English answer scripts. Built for the MU AI Builders Hackathon 2026, Track 2 (EduTech).</p>
+            <ul class="tags"><li>AI</li><li>EduTech</li><li>Hackathon</li></ul>
+          </article>
+
+          <article class="glass project reveal" style="--d:.12s">
+            <span class="num">06</span>
+            <h4>Learned Page Replacement</h4>
+            <p>CSE-307 Operating Systems term paper comparing FIFO, LRU and Optimal page replacement with a machine-learning-based policy.</p>
+            <ul class="tags"><li>Python</li><li>Operating Systems</li><li>ML</li></ul>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ACHIEVEMENTS -->
+    <section class="sec" id="achievements">
+      <div class="wrap">
+        <p class="kicker reveal">Contests &amp; awards</p>
+        <h2 class="reveal" style="--d:.05s">Achievements</h2>
+
+        <div class="stats reveal" style="--d:.1s">
+          <div><b>Pupil</b><span>Codeforces</span></div>
+          <div><b>2&#9733;</b><span>CodeChef</span></div>
+          <div><b>2</b><span>ICPC Dhaka Regional contests</span></div>
+          <div><b>4th</b><span>BUP CSE Tech Carnival 2025</span></div>
+        </div>
+
+        <div class="cards two">
+          <div class="glass hl reveal" style="--d:0.00s">
+            <div class="hl-top"><span class="date">Jun 2026</span><span class="rank">51st</span></div>
+            <h4>NSUCEC Cybernauts Inter University Programming Contest 2026</h4>
+            <p>North South University &middot; Team MIST_ERS</p>
+          </div>
+          <div class="glass hl reveal" style="--d:0.04s">
+            <div class="hl-top"><span class="date">Jun 2026</span><span class="rank">106th</span></div>
+            <h4>DUET Inter University Programming Contest (IUPC) 2026</h4>
+            <p>Dhaka University of Engineering &amp; Technology &middot; Team MIST_ERS</p>
+          </div>
+          <div class="glass hl reveal" style="--d:0.08s">
+            <div class="hl-top"><span class="date">Mar 2026</span><span class="rank">13th</span></div>
+            <h4>Eid Salami 2026 Contest</h4>
+            <p>Shohoj Coding</p>
+          </div>
+          <div class="glass hl reveal" style="--d:0.12s">
+            <div class="hl-top"><span class="date">Dec 2025</span><span class="rank">ICPC</span></div>
+            <h4>ICPC Asia Dhaka Regional Onsite 2025</h4>
+            <p>International Collegiate Programming Contest &middot; Team MIST_rHotasha</p>
+          </div>
+          <div class="glass hl reveal" style="--d:0.00s">
+            <div class="hl-top"><span class="date">Oct 2025</span><span class="rank">Award</span></div>
+            <h4>Outstanding result award</h4>
+            <p>Phitron &middot; Data Structures &amp; Algorithms, C++</p>
+          </div>
+          <div class="glass hl reveal" style="--d:0.04s">
+            <div class="hl-top"><span class="date">Sep 2025</span><span class="rank">4th</span></div>
+            <h4>CP contest, BUP CSE Tech Carnival 2025</h4>
+            <p>Bangladesh University of Professionals (DSI) &middot; Team MIST_rHotasha</p>
+          </div>
+          <div class="glass hl reveal" style="--d:0.08s">
+            <div class="hl-top"><span class="date">Nov 2024</span><span class="rank">ICPC</span></div>
+            <h4>ICPC Dhaka Regional Online Preliminary 2024</h4>
+            <p>International Collegiate Programming Contest</p>
+          </div>
+          <div class="glass hl reveal" style="--d:0.12s">
+            <div class="hl-top"><span class="date">Feb 2022</span><span class="rank">BdMO</span></div>
+            <h4>20th Bangladesh Mathematical Olympiad</h4>
+            <p>Bangladesh Mathematical Olympiad</p>
+          </div>
+        </div>
+        <p class="note reveal"><a class="more" href="https://codeforces.com/profile/miraz3301" target="_blank" rel="noopener noreferrer">Codeforces profile &rarr;</a></p>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="sec" id="contact">
+      <div class="wrap center">
+        <p class="kicker reveal">Get in touch</p>
+        <h2 class="reveal" style="--d:.05s">Let's build something.</h2>
+        <p class="reveal" style="--d:.1s">The quickest way to reach me is email or Telegram.</p>
+        <a class="btn reveal" style="--d:.15s" href="mailto:miraz.rzsian21@gmail.com">miraz.rzsian21@gmail.com</a>
+        <div class="reveal" style="--d:.2s">
+        <nav class="socials" aria-label="Social links (contact)">
+        <a class="social" href="https://codeforces.com/profile/miraz3301" target="_blank" rel="noopener noreferrer" aria-label="Codeforces"><img class="icon-img" alt="" src="assets/codeforces.webp"></a>
+        <a class="social" href="https://github.com/miraz3301" target="_blank" rel="noopener noreferrer" aria-label="Github"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="2.05 2 19.95 19.46"><path fill="currentColor" fill-rule="evenodd" d="M12.026 2c-5.509 0-9.974 4.465-9.974 9.974c0 4.406 2.857 8.145 6.821 9.465c.499.09.679-.217.679-.481c0-.237-.008-.865-.011-1.696c-2.775.602-3.361-1.338-3.361-1.338c-.452-1.152-1.107-1.459-1.107-1.459c-.905-.619.069-.605.069-.605c1.002.07 1.527 1.028 1.527 1.028c.89 1.524 2.336 1.084 2.902.829c.091-.645.351-1.085.635-1.334c-2.214-.251-4.542-1.107-4.542-4.93c0-1.087.389-1.979 1.024-2.675c-.101-.253-.446-1.268.099-2.64c0 0 .837-.269 2.742 1.021a9.582 9.582 0 0 1 2.496-.336a9.554 9.554 0 0 1 2.496.336c1.906-1.291 2.742-1.021 2.742-1.021c.545 1.372.203 2.387.099 2.64c.64.696 1.024 1.587 1.024 2.675c0 3.833-2.33 4.675-4.552 4.922c.355.308.675.916.675 1.846c0 1.334-.012 2.41-.012 2.737c0 .267.178.577.687.479C19.146 20.115 22 16.379 22 11.974C22 6.465 17.535 2 12.026 2z" clip-rule="evenodd"></path></svg></a>
+        <a class="social" href="https://linkedin.com/in/miraz3301" target="_blank" rel="noopener noreferrer" aria-label="Linkedin"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 24 24"><path fill="currentColor" d="M6.94 5a2 2 0 1 1-4-.002a2 2 0 0 1 4 .002M7 8.48H3V21h4zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-4 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.72-2.91z"></path></svg></a>
+        <a class="social" href="https://facebook.com/miraz3301" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="2 2 20 19.95"><path fill="currentColor" d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95"></path></svg></a>
+        <a class="social" href="https://instagram.com/_miraz3301" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="3 2.98 18.01 18.04"><path fill="currentColor" d="M20.947 8.305a6.53 6.53 0 0 0-.419-2.216a4.61 4.61 0 0 0-2.633-2.633a6.606 6.606 0 0 0-2.186-.42c-.962-.043-1.267-.055-3.709-.055s-2.755 0-3.71.055a6.606 6.606 0 0 0-2.185.42a4.607 4.607 0 0 0-2.633 2.633a6.554 6.554 0 0 0-.419 2.185c-.043.963-.056 1.268-.056 3.71s0 2.754.056 3.71c.015.748.156 1.486.419 2.187a4.61 4.61 0 0 0 2.634 2.632a6.584 6.584 0 0 0 2.185.45c.963.043 1.268.056 3.71.056s2.755 0 3.71-.056a6.59 6.59 0 0 0 2.186-.419a4.615 4.615 0 0 0 2.633-2.633c.263-.7.404-1.438.419-2.187c.043-.962.056-1.267.056-3.71c-.002-2.442-.002-2.752-.058-3.709zm-8.953 8.297c-2.554 0-4.623-2.069-4.623-4.623s2.069-4.623 4.623-4.623a4.623 4.623 0 0 1 0 9.246zm4.807-8.339a1.077 1.077 0 0 1-1.078-1.078a1.077 1.077 0 1 1 2.155 0c0 .596-.482 1.078-1.077 1.078z"></path><circle cx="11.994" cy="11.979" r="3.003" fill="currentColor"></circle></svg></a>
+        <a class="social" href="https://open.spotify.com/user/31ry3tbij5zippauejgh2ld7ep6u?si=1WPxiXTMQDGS9_ZumHkeOA&utm_source=copy-link" target="_blank" rel="noopener noreferrer" aria-label="Spotify"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="2.02 2.02 19.98 19.98"><path fill="currentColor" d="M12.01 2.019c-5.495 0-9.991 4.496-9.991 9.991c0 5.494 4.496 9.99 9.991 9.99c5.494 0 9.99-4.496 9.99-9.99c0-5.495-4.446-9.991-9.99-9.991zm4.595 14.436c-.199.299-.549.4-.85.201c-2.349-1.45-5.296-1.75-8.793-.951c-.348.102-.648-.148-.748-.449c-.101-.35.149-.648.45-.749c3.795-.85 7.093-.499 9.69 1.1c.35.149.4.548.251.848zm1.2-2.747c-.251.349-.7.499-1.051.249c-2.697-1.646-6.792-2.148-9.939-1.148c-.398.101-.85-.1-.949-.498c-.101-.402.1-.852.499-.952c3.646-1.098 8.143-.548 11.239 1.351c.3.149.45.648.201.998zm.099-2.799c-3.197-1.897-8.542-2.097-11.59-1.146a.938.938 0 0 1-1.148-.6a.937.937 0 0 1 .599-1.151c3.547-1.049 9.392-.85 13.089 1.351c.449.249.599.849.349 1.298c-.25.35-.849.498-1.299.248z"></path></svg></a>
+        <a class="social" href="https://discord.com/users/865475390561320980" target="_blank" rel="noopener noreferrer" aria-label="Discord"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="1.96 4.26 20.03 15.53"><path fill="currentColor" d="M14.82 4.26a10.14 10.14 0 0 0-.53 1.1a14.66 14.66 0 0 0-4.58 0a10.14 10.14 0 0 0-.53-1.1a16 16 0 0 0-4.13 1.3a17.33 17.33 0 0 0-3 11.59a16.6 16.6 0 0 0 5.07 2.59A12.89 12.89 0 0 0 8.23 18a9.65 9.65 0 0 1-1.71-.83a3.39 3.39 0 0 0 .42-.33a11.66 11.66 0 0 0 10.12 0q.21.18.42.33a10.84 10.84 0 0 1-1.71.84a12.41 12.41 0 0 0 1.08 1.78a16.44 16.44 0 0 0 5.06-2.59a17.22 17.22 0 0 0-3-11.59a16.09 16.09 0 0 0-4.09-1.35zM8.68 14.81a1.94 1.94 0 0 1-1.8-2a1.93 1.93 0 0 1 1.8-2a1.93 1.93 0 0 1 1.8 2a1.93 1.93 0 0 1-1.8 2zm6.64 0a1.94 1.94 0 0 1-1.8-2a1.93 1.93 0 0 1 1.8-2a1.92 1.92 0 0 1 1.8 2a1.92 1.92 0 0 1-1.8 2z"></path></svg></a>
+        <a class="social" href="mailto:miraz.rzsian21@gmail.com" aria-label="Email"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="2 4 20 16"><path fill="currentColor" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2m0 4l-8 5l-8-5V6l8 5l8-5z"></path></svg></a>
+        <a class="social" href="https://t.me/miraz3301" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="2 3.61 20.02 16.79"><path fill="currentColor" d="m20.665 3.717l-17.73 6.837c-1.21.486-1.203 1.161-.222 1.462l4.552 1.42l10.532-6.645c.498-.303.953-.14.579.192l-8.533 7.701h-.002l.002.001l-.314 4.692c.46 0 .663-.211.921-.46l2.211-2.15l4.599 3.397c.848.467 1.457.227 1.668-.785l3.019-14.228c.309-1.239-.473-1.8-1.282-1.434z"></path></svg></a>
+      </nav>
+        </div>
+        <footer class="foot">&copy; 2026 Md. Miraz Morshed</footer>
+      </div>
+    </section>
+  </div>
+
+  <button class="to-top" id="to-top" type="button" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg>
+  </button>
+
+  <script src="script.js"></script>
+  <script src="portfolio.js"></script>
+</body>
+</html>
