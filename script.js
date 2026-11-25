@@ -85,6 +85,11 @@ function buildShuffle(el) {
       el.cells.push({ cell, strip });
     });
     el.append(w);
+     if (wi === 1) {                       // line break after "Miraz"
+      const br = document.createElement("span");
+      br.className = "line-break";
+      el.append(br);
+    }
   });
 }
 
