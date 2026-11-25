@@ -23,7 +23,16 @@
   <div id="enter" role="button" tabindex="0" aria-label="Click to enter">
     <div class="enter-text">click to enter...</div>
   </div>
-
+  <div class="volume" id="volume">
+  <button class="vol-btn" id="vol-btn" type="button" aria-label="Mute / unmute">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M3 9v6h4l5 4V5L7 9H3z" fill="currentColor"/>
+      <g class="waves"><path d="M16 8.5a5 5 0 0 1 0 7"/><path d="M18.5 6a8.5 8.5 0 0 1 0 12"/></g>
+      <g class="cross"><path d="M16 9.5l5 5M21 9.5l-5 5"/></g>
+    </svg>
+  </button>
+  <input class="vol-range" id="vol-range" type="range" min="0" max="100" value="50" aria-label="Volume">
+</div>
   <main class="page">
     <section class="card">
       <div class="avatar-wrap">
