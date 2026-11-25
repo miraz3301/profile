@@ -24,14 +24,28 @@ function start() {
   if (entered) return;
   entered = true;
   enter.classList.add("hide");
-  audio.volume = CONFIG.audioVolume;
   video.play().catch(() => {});
   audio.play().catch(() => {});
   runShuffle(nameEl);
 }
 enter.addEventListener("click", start);
 enter.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") start(); });
+const volBox = document.getElementById("volume");
+const volBtn = document.getElementById("vol-btn");
+const volRange = document.getElementById("vol-range");
+let lastVol = CONFIG.audioVolume || 0.5;
 
+function setVolume(v) {
+  v = Math.min(1, Math.max(0, v));
+  audio.volume = v;
+  volRange.value = Math.round(v * 100);
+  volRange.style.setProperty("--v", volRange.value + "%");
+  volBox.classList.toggle("muted", v === 0);
+  if (v > 0) lastVol = v;
+}
+volRange.addEventListener("input", () => setVolume(volRange.value / 100));
+volBtn.addEventListener("click", () => setVolume(audio.volume > 0 ? 0 : lastVol));
+setVolume(CONFIG.audioVolume);
 /* ============================================================
    Username "shuffle" effect (slides each letter in from the left)
    ============================================================ */
